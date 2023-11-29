@@ -6,7 +6,7 @@ pipeline {
 
     environment {
 
-    DOCKERHUB_CREDENTIALS = credentials('dockerusermubeen')
+    DOCKERHUB_CREDENTIALS = credentials('mydockeruser')
      registry = "vamsisqldba2401/8am-lms-be"
         registryCredential = 'mydockeruser'
        
