@@ -5,9 +5,9 @@ pipeline {
 
     environment {
 
-    DOCKERHUB_CREDENTIALS = credentials('dockerusermubeen')
-     registry = "mubeen507/frontend-lms"
-        registryCredential = 'dockerhub'
+    DOCKERHUB_CREDENTIALS = credentials('mydockeruser')
+     registry = "vamsisqldba2401/8am-lms-fe"
+        registryCredential = 'mydockeruser'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
 
         stage('Building the docker image') {
             steps {
-                sh 'cd webapp && docker build -t mubeen507/frontend-lms .'
+                sh 'cd webapp && docker build -t vamsisqldba2401/8am-lms-fe .'
             }
         }
         stage('Logging into dockerhub account') {
@@ -25,18 +25,18 @@ pipeline {
         }
         stage('pushing the docker image into dockerhub') {
             steps {
-                  sh 'docker push mubeen507/frontend-lms'
+                  sh 'docker push vamsisqldba2401/8am-lms-fe'
             }
         }
         stage('Remove old docker images') {
              steps {
-                 sh 'docker rmi -f mubeen507/frontend-lms'
+                 sh 'docker rmi -f vamsisqldba2401/8am-lms-fe'
             }
         }
          stage('Running the docker container') {
             steps {
                   sh 'docker container rm --force fe'
-                  sh 'docker run -dt -p 8000:80 --name fe mubeen507/frontend-lms'
+                  sh 'docker run -dt -p 8000:80 --name fe vamsisqldba2401/8am-lms-fe'
             }
         }
     }
